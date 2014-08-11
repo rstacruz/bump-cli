@@ -22,7 +22,6 @@
   },
   "dependencies": {
     "minimist": "^1.1.0",
-    "prompt": "^0.2.13",
     "semver": "^3.0.1"
   }
 }
