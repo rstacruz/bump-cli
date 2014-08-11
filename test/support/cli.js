@@ -1,15 +1,51 @@
 /* jshint expr: true */
 
+/***
+ * cli:
+ * Helper for CLI tests.
+ *
+ *     var cli = require('...');
+ *     cli.bin = './bin/hello';
+ */
+
 var exec = require('child_process').exec;
+
+/**
+ * result : cli.result
+ * the result.
+ *
+ *     describe('help', function () {
+ *       cli.run('--help');
+ *
+ *       it('works', function () {
+ *         cli.result.code   => 0
+ *         cli.result.error  => true/false
+ *         cli.result.out    => "..." (stdout output)
+ *         cli.result.stderr => "..." (stderr output)
+ *       });
+ *     });
+ */
+
 exports.result = {};
+
+
+/**
+ * bin : cli.bin
+ * the bin to run.
+ *
+ *     var cli = require('...');
+ *     cli.bin = './bin/hello';
+ */
+
 exports.bin = './bin/lol';
 
 /**
- * runs(): runs
+ * run() : cli.run(cmd)
+ * Runs a given command.
  *
  *   describe('running', function () {
- *     run('--help');
- *     success();
+ *     cli.run('--help');
+ *     cli.success();
  *   });
  */
 
@@ -35,11 +71,12 @@ exports.run = function (args) {
 };
 
 /**
- * success(): asserts success
+ * success() : cli.success()
+ * asserts success
  *
  *   describe('running', function () {
- *     run('--help');
- *     success();
+ *     cli.run('--help');
+ *     cli.success();
  *   });
  */
 
@@ -51,11 +88,12 @@ exports.success = function () {
 };
 
 /**
- * pipe(): runs and pipes things into stdin
+ * pipe() : cli.pipe(input, args)
+ * runs and pipes things into stdin
  *
  *   describe('pipes', function () {
- *     pipe('var x = 2', ['--no-pager'])
- *     success();
+ *     cli.pipe('var x = 2', ['--no-pager'])
+ *     cli.success();
  *   });
  */
 
