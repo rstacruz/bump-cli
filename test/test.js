@@ -6,13 +6,13 @@ var Context = require('../index').Context;
 describe('using with a multi-line gemspec', function () {
   beforeEach(function () {
     src = [
-      "#rb",
+      "require 'rubygems'",
       "",
       "Gem.specification do |s|",
       "  s.version = '2.2.0'",
       "end"
     ].join('\n');
-    ctx = new Context(src);
+    ctx = new Context(src, "foo.gemspec");
   });
 
   it('finds the version', function () {
@@ -29,12 +29,16 @@ describe('using with a multi-line gemspec', function () {
   });
 
   it('gets the before and after', function () {
-    expect(ctx.before).eql("#rb\n\nGem.specification do |s|\n");
+    expect(ctx.before).eql("require 'rubygems'\n\nGem.specification do |s|\n");
     expect(ctx.after).eql("\nend");
   });
 
-  it('reconstructs', function () {
-    expect(ctx.toString()).eql(src);
+  it('reconstructs using toString()', function () {
+    expect(ctx.toString()).eql(src.replace(/2.2.0/, '2.2.1'));
+  });
+
+  it('preview', function () {
+    expect(ctx.preview()).have.length.gt(10);
   });
 
   it('finds source line', function () {
@@ -126,12 +130,18 @@ describe('specifying an increment', function () {
   });
 
   it('works with "minor"', function () {
-    ctx = new Context("version=2.2.5", { inc: 'minor' });
+    ctx = new Context("version=2.2.5", '', { inc: 'minor' });
     expect(ctx.newVersion).eql('2.3.0');
   });
 
   it('works with "preminor"', function () {
-    ctx = new Context("version=2.2.5", { inc: 'preminor' });
+    ctx = new Context("version=2.2.5", '', { inc: 'preminor' });
     expect(ctx.newVersion).eql('2.3.0-0');
+  });
+
+  it('works with setting an explicit version', function () {
+    ctx = new Context("version=2.2.5", '', { version: 'pancakes' });
+    expect(ctx.newVersion).eql('pancakes');
+    expect(ctx.toString()).eql('version=pancakes');
   });
 });

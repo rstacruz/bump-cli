@@ -1,0 +1,97 @@
+#!/usr/bin/env node
+var Context = require('../index').Context;
+var prompt = require('prompt');
+var fs = require('fs');
+
+var args = require('minimist')(process.argv.slice(2), {
+  string: 'to',
+  boolean: ['patch', 'minor', 'major', 'premajor', 'preminor', 'prepatch', 'prerelease'],
+  alias: { h: 'help', V: 'version', v: 'to', p: 'patch', m: 'minor', M:' major' }
+});
+
+if (args.help || !args._[0]) {
+  var cmd = require('path').basename(process.argv[1]);
+  console.log([
+      'Usage:',
+      '    '+cmd+' FILES [options]',
+      '',
+      'Options:',
+      '    -h, --help         print usage information',
+      '    -V, --version      show version info and exit',
+      '',
+      "    -y, --yes          assume yes, don't prompt",
+      "    -q, --quiet        supress messages",
+      '',
+      '    -v, --to VERSION   use this version',
+      '    -p, --patch        bump patch version (2.3.4 -> 2.3.5) - default',
+      '    -m, --minor        bump minor version (2.3.4 -> 2.4.0)',
+      '    -M, --major        bump major version (2.3.4 -> 3.0.0)',
+  ].join('\n'));
+  process.exit();
+}
+
+if (args.version) {
+  console.log(require('../package.json').version);
+  process.exit();
+}
+
+try {
+  var contexts = [];
+  var options = toOptions(args);
+
+  args._.forEach(function (fname) {
+    var contents = require('fs').readFileSync(fname, 'utf-8');
+    var ctx = new Context(contents, fname, options);
+    console.warn(ctx.preview());
+    console.warn();
+    contexts.push(ctx);
+  });
+
+  ask('go? [Yn]', function (res) {
+    if (res.toLowerCase() === '' || !res) {
+      contexts.forEach(function (ctx) {
+        fs.writeFileSync(ctx.filename, ctx.toString(), 'utf-8');
+      });
+    }
+  });
+
+} catch (e) {
+  console.log(e.message);
+  process.exit(8);
+}
+
+/**
+ * toOptions():
+ * (private)
+ */
+
+function toOptions (args) {
+  var options = {};
+
+  if (args.to) options.version = args.to;
+  else if (args.major) options.inc = 'major';
+  else if (args.minor) options.inc = 'minor';
+  else if (args.premajor) options.inc = 'premajor';
+  else if (args.preminor) options.inc = 'preminor';
+  else if (args.prepatch) options.inc = 'prepatch';
+  else if (args.prerelease) options.inc = 'prerelease';
+  else options.inc = 'patch';
+
+  return options;
+}
+
+/**
+ * ask():
+ * (private) thanks https://coderwall.com/p/v16yja
+ */
+
+function ask (question, fn) {
+  var r = require('readline').createInterface({
+    input: process.stdin,
+    output: process.stdout});
+
+  r.question(question, function (answer) {
+    r.close();
+    fn(answer);
+  });
+}
