@@ -35,11 +35,28 @@ describe('working with files', function () {
   var fname = tempfile();
 
   before(function (next) {
-    fs.writeFile(fname, 'VERSION = "2.2.0"\n', 'utf-8', next);
+    fs.writeFile(fname, 'VERSION = "1.0.0"\n', 'utf-8', next);
   });
 
   after(function (next) {
     fs.unlink(fname, next);
+  });
+
+  describe('invoking with -v', function () {
+    cli.pipe('\n', [fname, '-v', '2.2.0']);
+    cli.success();
+
+    it('works', function () {
+      var str = fs.readFileSync(fname, 'utf-8');
+      expect(str).eql('VERSION = "2.2.0"\n');
+    });
+
+    it('produced preview output', function () {
+      expect(res.stderr).match(/done!/);
+      expect(res.stderr).include('2.2.0');
+      expect(res.stderr).include('was 1.0.0');
+      expect(res.stderr).match(/VERSION = .*2\.2\.0.*/);
+    });
   });
 
   describe('invoking with --yes', function () {
@@ -53,7 +70,7 @@ describe('working with files', function () {
   });
 
   describe('invoking by default', function () {
-    cli.pipe('y\n', [fname]);
+    cli.pipe('\n', [fname]);
     cli.success();
 
     it('prints a preview', function () {
@@ -64,6 +81,23 @@ describe('working with files', function () {
     });
 
     it('updates the version', function () {
+      var str = fs.readFileSync(fname, 'utf-8');
+      expect(str).eql('VERSION = "2.2.2"\n');
+    });
+  });
+
+  describe('aborting with "n"', function () {
+    cli.pipe('n\n', [fname]);
+
+    it('produces a non-zero exit', function () {
+      expect(res.code).gt(0);
+    });
+
+    it('prints an aborted message', function () {
+      expect(res.stderr).match(/cancelled/);
+    });
+
+    it('doesnt do anything', function () {
       var str = fs.readFileSync(fname, 'utf-8');
       expect(str).eql('VERSION = "2.2.2"\n');
     });
