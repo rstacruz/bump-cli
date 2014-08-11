@@ -123,7 +123,7 @@ describe('using different version schemes', function () {
   });
 });
 
-describe('xml', function () {
+xdescribe('xml', function () {
   it('ignores xml version strings', function () {
     ctx = new Context("<?xml version='1.0.0'?>\n<app version='2.0.4'>");
     expect(ctx.version).eql('2.0.4');
