@@ -39,7 +39,6 @@ try {
   // don't proceed with --dry-run
   if (args['dry-run']) return;
 
-  print();
   askToProceed(function (res) {
     if (res) {
       contexts.forEach(function (ctx) {
@@ -63,6 +62,7 @@ function print () {
 
 function askToProceed (fn) {
   if (args.yes || args.quiet) return fn(true);
+  print();
   ask('proceed? [Yn] ', function (res) {
     if (res.toLowerCase() === 'y' || !res)
       fn(true);
