@@ -5,7 +5,7 @@ var fs = require('fs');
 
 var args = require('minimist')(process.argv.slice(2), {
   string: 'to',
-  boolean: ['patch', 'minor', 'major', 'premajor', 'preminor', 'prepatch', 'prerelease', 'yes', 'quiet'],
+  boolean: ['patch', 'minor', 'major', 'premajor', 'preminor', 'prepatch', 'prerelease', 'yes', 'quiet', 'dryrun'],
   alias: { h: 'help', V: 'version', v: 'to', p: 'patch', m: 'minor', M: 'major', y: 'yes', q: 'quiet' }
 });
 
@@ -31,12 +31,15 @@ try {
     contexts.push(ctx);
   });
 
-  print();
   contexts.forEach(function (ctx) {
-    print(ctx.preview());
     print();
+    print(ctx.preview());
   });
 
+  // don't proceed with --dryrun
+  if (args.dryrun) return;
+
+  print();
   askToProceed(function (res) {
     if (res) {
       contexts.forEach(function (ctx) {
