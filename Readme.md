@@ -37,4 +37,4 @@ Authored and maintained by Rico Sta. Cruz with help from [contributors].
 [MIT License]: http://mit-license.org/
 [contributors]: http://github.com/rstacruz/bump-cli/contributors
 [semver]: https://www.npmjs.org/package/semver
-[options]: help.txt
+[options]: Help.txt
