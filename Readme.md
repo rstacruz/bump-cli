@@ -2,6 +2,8 @@
 
 Bumps semantic versions according to [semver] guidelines.
 
+![Loading screencast...](http://ricostacruz.com/bump-cli/bump.gif)
+
 ## Install
 
 ```sh
