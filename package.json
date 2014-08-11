@@ -1,6 +1,6 @@
 {
   "name": "bump-cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Increments version numbers in files",
   "main": "index.js",
   "directories": {
