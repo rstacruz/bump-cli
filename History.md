@@ -1,3 +1,7 @@
+## v1.1.2 - August 11, 2014
+
+ * Fix execution error.
+
 ## v1.1.1 - August 11, 2014
 
  * Return a non-zero exit code when aborted.
