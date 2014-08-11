@@ -5,7 +5,7 @@ var fs = require('fs');
 
 var args = require('minimist')(process.argv.slice(2), {
   string: 'to',
-  boolean: ['patch', 'minor', 'major', 'premajor', 'preminor', 'prepatch', 'prerelease', 'yes', 'quiet', 'dry-run'],
+  boolean: ['patch', 'minor', 'major', 'premajor', 'preminor', 'prepatch', 'prerelease', 'yes', 'quiet', 'dry-run', 'pre'],
   alias: { h: 'help', V: 'version', v: 'to', p: 'patch', m: 'minor', M: 'major', y: 'yes', q: 'quiet', n: 'dry-run' }
 });
 
@@ -85,7 +85,7 @@ function toOptions (args) {
   else if (args.premajor) options.inc = 'premajor';
   else if (args.preminor) options.inc = 'preminor';
   else if (args.prepatch) options.inc = 'prepatch';
-  else if (args.prerelease) options.inc = 'prerelease';
+  else if (args.prerelease || args.pre) options.inc = 'prerelease';
   else options.inc = 'patch';
 
   return options;

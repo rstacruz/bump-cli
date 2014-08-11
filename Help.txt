@@ -17,6 +17,7 @@ Bumping:
     -M, --major        bump major version (2.3.4 -> 3.0.0)
 
 Preleases:
+        --pre          same as --prerelease
         --prerelease   bump a prerelease number (2.3.4-8 -> 2.3.4-9)
         --prepatch     bump patch and add prerelease (2.3.4 -> 2.3.5-0)
         --preminor     bump minor and add prerelease (2.3.4 -> 2.4.0-0)
