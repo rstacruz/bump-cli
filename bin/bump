@@ -19,9 +19,9 @@ if (args.help || !args._[0]) {
       '    -h, --help         print usage information',
       '    -V, --version      show version info and exit',
       '',
-      /* "    -y, --yes          assume yes, don't prompt", */
-      /* "    -q, --quiet        supress messages", */
-      /* '', */
+      "    -y, --yes          assume yes, don't prompt",
+      "    -q, --quiet        supress messages (implies -y)",
+      '',
       '    -v, --to VERSION   use this version',
       '    -p, --patch        bump patch version (2.3.4 -> 2.3.5) - default',
       '    -m, --minor        bump minor version (2.3.4 -> 2.4.0)',
@@ -47,19 +47,18 @@ try {
   });
 
   contexts.forEach(function (ctx) {
-    console.warn(ctx.preview());
-    console.warn();
+    print(ctx.preview());
+    print();
   });
 
   askToProceed(function (res) {
-    console.warn();
     if (res) {
       contexts.forEach(function (ctx) {
         fs.writeFileSync(ctx.filename, ctx.toString(), 'utf-8');
       });
-      console.warn('\033[32m✓\033[0m', 'done');
+      if (args.quiet) print('\033[32m✓\033[0m', 'done');
     } else {
-      console.warn('\033[31m✗\033[0m', 'cancelled');
+      print('\033[31m✗\033[0m', 'cancelled');
     }
   });
 
@@ -68,8 +67,15 @@ try {
   process.exit(8);
 }
 
+function print () {
+  if (args.quiet) return;
+  console.warn.apply(console, arguments);
+}
+
 function askToProceed (fn) {
+  if (args.yes || args.quiet) return fn(true);
   ask('proceed? [Yn] ', function (res) {
+    console.warn();
     if (res.toLowerCase() === '' || !res)
       fn(true);
     else
