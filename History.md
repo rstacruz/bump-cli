@@ -1,3 +1,7 @@
+## v1.1.1 - August 11, 2014
+
+ * Return a non-zero exit code when aborted.
+
 ## v1.1.0 - August 11, 2014
 
  * Implement `--dry-run` (`-n`) to simulate.
