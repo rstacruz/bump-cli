@@ -1,18 +1,6 @@
 # bump-cli
 
-Bumps semantic versions.
-
-```sh
-$ bump package.json component.json
-
-package.json
-  3  "version": "0.3.1",  /* was 0.3.0 */
-
-component.json
-  3  "version": "0.3.1",  /* was 0.3.0 */
-
-proceed? [Yn]
-```
+Bumps semantic versions according to [semver] guidelines.
 
 ## Install
 
@@ -28,7 +16,7 @@ $ bump --help
 Inspired by https://github.com/marksteve/bump. bump-cli is backwards-compatible 
 (mostly) with the old 2013 version of @marksteve's bump.
 
-## Thanks
+## :copyright:
 
 **bump-cli** © 2014+, Rico Sta. Cruz. Released under the [MIT License].<br>
 Authored and maintained by Rico Sta. Cruz with help from [contributors].
@@ -39,3 +27,4 @@ Authored and maintained by Rico Sta. Cruz with help from [contributors].
 
 [MIT License]: http://mit-license.org/
 [contributors]: http://github.com/rstacruz/bump-cli/contributors
+[semver]: https://www.npmjs.org/package/semver

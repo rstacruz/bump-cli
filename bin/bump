@@ -26,6 +26,11 @@ if (args.help || !args._[0]) {
       '    -p, --patch        bump patch version (2.3.4 -> 2.3.5) - default',
       '    -m, --minor        bump minor version (2.3.4 -> 2.4.0)',
       '    -M, --major        bump major version (2.3.4 -> 3.0.0)',
+      '',
+      '        --prerelease   bump a prerelease number (2.3.4-8 -> 2.3.4-9)',
+      '        --prepatch     bump patch and add prerelease (2.3.4 -> 2.3.5-0)',
+      '        --preminor     bump minor and add prerelease (2.3.4 -> 2.4.0-0)',
+      '        --premajor     bump major and add prerelease (2.3.4 -> 3.0.0-0)',
   ].join('\n'));
   process.exit();
 }
