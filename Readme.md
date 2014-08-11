@@ -13,7 +13,7 @@ $ bump --help
 
 See [command line options][options].
 
-[![npm version](https://badge.fury.io/js/jquery.svg)](https://npmjs.org/package/jquery "View this project on npm")
+[![npm version](https://badge.fury.io/js/bump-cli.svg)](https://npmjs.org/package/bump-cli "View this project on npm")
 
 ## Thanks
 
