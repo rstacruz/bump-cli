@@ -3,7 +3,7 @@ var Matcher = require('./lib/matcher');
 
 var expr = new Matcher({
   before: /([\s\S]*?)/,
-  prefix: /([^\n]*version.*)/,
+  prefix: /([^\n]*(?!xml )version.*)/,
   trio: /\d+\.\d+\.\d+/,
   prerelease: /\-[a-z0-9]+/,
   build: /\+[a-z0-9]+/,
@@ -48,6 +48,7 @@ function Context (src, filename, options) {
 Context.prototype.proc = function () {
   var m = this.src.match(expr);
   if (m) {
+    this.valid = true;
     this.before = m[1];
     this.lineBefore = m[2];
     this.version = m[3];
@@ -56,6 +57,8 @@ Context.prototype.proc = function () {
     this.lineAfter = m[4];
     this.after = m[5];
     this.line = this.before.split('\n').length;
+  } else {
+    this.valid = false;
   }
 };
 
@@ -75,11 +78,16 @@ Context.prototype.toString = function () {
 };
 
 
+/**
+ * preview():
+ * (private) renders a console preview of changes to be done
+ */
+
 Context.prototype.preview = function () {
   this.lines = [];
   this.lines.push(c(1, this.filename));
   this.lines.push([
-    '  ',
+    '   ',
     c('30', this.line),
     this.lineBefore,
     c('32;4', this.newVersion),

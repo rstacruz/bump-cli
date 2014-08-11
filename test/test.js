@@ -123,6 +123,20 @@ describe('using different version schemes', function () {
   });
 });
 
+describe('xml', function () {
+  it('ignores xml version strings', function () {
+    ctx = new Context("<?xml version='1.0.0'?>\n<app version='2.0.4'>");
+    expect(ctx.version).eql('2.0.4');
+  });
+});
+
+describe('using with invalid files', function () {
+  it('ignores invalid files', function () {
+    ctx = new Context("holla");
+    expect(ctx.valid).eql(false);
+  });
+});
+
 describe('specifying an increment', function () {
   it('defaults to patch', function () {
     ctx = new Context("version=2.2.5");

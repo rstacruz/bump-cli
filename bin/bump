@@ -5,8 +5,8 @@ var fs = require('fs');
 
 var args = require('minimist')(process.argv.slice(2), {
   string: 'to',
-  boolean: ['patch', 'minor', 'major', 'premajor', 'preminor', 'prepatch', 'prerelease'],
-  alias: { h: 'help', V: 'version', v: 'to', p: 'patch', m: 'minor', M:' major' }
+  boolean: ['patch', 'minor', 'major', 'premajor', 'preminor', 'prepatch', 'prerelease', 'yes', 'quiet'],
+  alias: { h: 'help', V: 'version', v: 'to', p: 'patch', m: 'minor', M: 'major', y: 'yes', q: 'quiet' }
 });
 
 if (args.help || !args._[0]) {
@@ -19,9 +19,9 @@ if (args.help || !args._[0]) {
       '    -h, --help         print usage information',
       '    -V, --version      show version info and exit',
       '',
-      "    -y, --yes          assume yes, don't prompt",
-      "    -q, --quiet        supress messages",
-      '',
+      /* "    -y, --yes          assume yes, don't prompt", */
+      /* "    -q, --quiet        supress messages", */
+      /* '', */
       '    -v, --to VERSION   use this version',
       '    -p, --patch        bump patch version (2.3.4 -> 2.3.5) - default',
       '    -m, --minor        bump minor version (2.3.4 -> 2.4.0)',
@@ -42,25 +42,39 @@ try {
   args._.forEach(function (fname) {
     var contents = require('fs').readFileSync(fname, 'utf-8');
     var ctx = new Context(contents, fname, options);
-    console.warn(ctx.preview());
-    console.warn();
+    if (!ctx.valid) { throw new Error("ENOVERSION, no version found on '" + fname + "'"); }
     contexts.push(ctx);
   });
 
-  ask('proceed? [Yn] ', function (res) {
-    if (res.toLowerCase() === '' || !res) {
+  contexts.forEach(function (ctx) {
+    console.warn(ctx.preview());
+    console.warn();
+  });
+
+  askToProceed(function (res) {
+    console.warn();
+    if (res) {
       contexts.forEach(function (ctx) {
         fs.writeFileSync(ctx.filename, ctx.toString(), 'utf-8');
       });
       console.warn('\033[32m✓\033[0m', 'done');
     } else {
-      console.warn('\033[31m✗\033[0m', 'aborted');
+      console.warn('\033[31m✗\033[0m', 'cancelled');
     }
   });
 
 } catch (e) {
-  console.log(e.message);
+  console.warn('\033[31m✗\033[0m', e.message);
   process.exit(8);
+}
+
+function askToProceed (fn) {
+  ask('proceed? [Yn] ', function (res) {
+    if (res.toLowerCase() === '' || !res)
+      fn(true);
+    else
+      fn(false);
+  });
 }
 
 /**
@@ -91,7 +105,7 @@ function toOptions (args) {
 function ask (question, fn) {
   var r = require('readline').createInterface({
     input: process.stdin,
-    output: process.stdout});
+    output: process.stderr});
 
   r.question(question, function (answer) {
     r.close();
