@@ -8,7 +8,7 @@ Options:
 Interactivity:
     -y, --yes          assume yes, don't prompt
     -q, --quiet        supress messages (implies -y)
-        --dryrun       don't do anything, just simulate
+    -n, --dry-run      don't do anything, just simulate
 
 Bumping:
     -v, --to VERSION   use this version
