@@ -1,7 +1,7 @@
 {
-  "name": "bump.js",
-  "version": "0.0.0",
-  "description": "",
+  "name": "bump-cli",
+  "version": "0.1.0",
+  "description": "Increments version numbers in files",
   "main": "index.js",
   "directories": {
     "test": "test"
@@ -9,8 +9,8 @@
   "scripts": {
     "test": "mocha"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Rico Sta. Cruz <hi@ricostacruz.com>",
+  "license": "MIT",
   "devDependencies": {
     "chai": "^1.9.1",
     "mocha": "^1.21.4",
