@@ -89,6 +89,7 @@ Context.prototype.preview = function () {
   this.lines.push([
     '   ',
     c('30', this.line),
+    ' ',
     this.lineBefore,
     c('32;4', this.newVersion),
     this.lineAfter,
