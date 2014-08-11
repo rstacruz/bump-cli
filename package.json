@@ -6,6 +6,10 @@
   "directories": {
     "test": "test"
   },
+  "repository": {
+     "type": "git",
+     "url": "https://github.com/rstacruz/bump-cli.git"
+  },
   "scripts": {
     "test": "mocha"
   },
