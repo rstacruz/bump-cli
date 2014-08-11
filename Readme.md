@@ -25,7 +25,7 @@ Inspired by [@marksteve]'s [bump][bump-py]. `bump-cli` is backwards-compatible
 [@marksteve]: https://github.com/marksteve
 [bump-py]: https://github.com/marksteve/bump
 
-**©**
+:copyright:
 
 **bump-cli** © 2014+, Rico Sta. Cruz. Released under the [MIT] License.<br>
 Authored and maintained by Rico Sta. Cruz with help from contributors. [(list)][contributors]
