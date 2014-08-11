@@ -20,7 +20,7 @@ describe('using with a multi-line gemspec', function () {
   });
 
   it('sets the new version', function () {
-    expect(ctx.newVersion).eql('2.2.0');
+    expect(ctx.newVersion).eql('2.2.1');
   });
 
   it('gets the line before and after', function () {
@@ -55,10 +55,6 @@ describe('having the version on the first line', function () {
     expect(ctx.version).eql('2.2.0');
   });
 
-  it('sets the new version', function () {
-    expect(ctx.newVersion).eql('2.2.0');
-  });
-
   it('gets the line before and after', function () {
     expect(ctx.lineBefore).eql("s.version = '");
     expect(ctx.lineAfter).eql("'");
@@ -86,10 +82,6 @@ describe('having the version as the only line', function () {
     expect(ctx.version).eql('2.2.0');
   });
 
-  it('sets the new version', function () {
-    expect(ctx.newVersion).eql('2.2.0');
-  });
-
   it('gets the line before and after', function () {
     expect(ctx.lineBefore).eql("<x version='");
     expect(ctx.lineAfter).eql("'/>");
@@ -102,5 +94,44 @@ describe('having the version as the only line', function () {
 
   it('finds source line', function () {
     expect(ctx.line).eql(1);
+  });
+});
+
+describe('using different version schemes', function () {
+  it('works with basic semver-style versions', function () {
+    ctx = new Context("version=2.2.5");
+    expect(ctx.version).eql('2.2.5');
+  });
+
+  it('works with prereleases', function () {
+    ctx = new Context("version=2.2.5-pre3");
+    expect(ctx.version).eql('2.2.5-pre3');
+  });
+
+  it('works with build IDs', function () {
+    ctx = new Context("version=2.2.5+20140404");
+    expect(ctx.version).eql('2.2.5+20140404');
+  });
+
+  it('works with prereleases and build IDs', function () {
+    ctx = new Context("version=2.2.5-pre3+20140404");
+    expect(ctx.version).eql('2.2.5-pre3+20140404');
+  });
+});
+
+describe('specifying an increment', function () {
+  it('defaults to patch', function () {
+    ctx = new Context("version=2.2.5");
+    expect(ctx.newVersion).eql('2.2.6');
+  });
+
+  it('works with "minor"', function () {
+    ctx = new Context("version=2.2.5", { inc: 'minor' });
+    expect(ctx.newVersion).eql('2.3.0');
+  });
+
+  it('works with "preminor"', function () {
+    ctx = new Context("version=2.2.5", { inc: 'preminor' });
+    expect(ctx.newVersion).eql('2.3.0-0');
   });
 });
