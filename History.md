@@ -1,3 +1,8 @@
+## v1.0.4 - August 11, 2014
+
+ * Fix --version not working.
+ * Improve --help appearance.
+
 ## v1.0.3 - August 11, 2014
 
  * Minor print formatting improvements.
