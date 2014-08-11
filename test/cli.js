@@ -112,4 +112,42 @@ describe('working with files', function () {
       expect(str).eql('VERSION = "2.3.0"\n');
     });
   });
+
+  describe('invoking with --quiet', function () {
+    cli.run(fname + ' -q -v 2.2.0');
+    cli.success();
+
+    it('works', function () {
+      var str = fs.readFileSync(fname, 'utf-8');
+      expect(str).eql('VERSION = "2.2.0"\n');
+    });
+
+    it('produces no stderr', function () {
+      expect(res.stderr).eql("");
+    });
+  });
+
+  describe('invoking with a file without a version', function () {
+    cli.run('bin/bump');
+
+    it('produces a non-zero exit', function () {
+      expect(res.code).gt(0);
+    });
+
+    it('produces stderr', function () {
+      expect(res.stderr).match(/no version found/);
+    });
+  });
+
+  describe('invoking with an invalid file', function () {
+    cli.run('trololololol');
+
+    it('produces a non-zero exit', function () {
+      expect(res.code).gt(0);
+    });
+
+    it('produces stderr', function () {
+      expect(res.stderr).match(/no such file/);
+    });
+  });
 });
