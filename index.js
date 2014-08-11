@@ -94,7 +94,7 @@ Context.prototype.preview = function () {
     c('32;4', this.newVersion),
     this.lineAfter,
     '  ',
-    c('31', '/* was ' + this.version + ' */')
+    c('31', '(was ' + this.version + ')')
   ].join(""));
   return this.lines.join("\n");
 };
