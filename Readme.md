@@ -4,6 +4,8 @@ Bumps semantic versions according to [semver] guidelines.
 
 ![Loading screencast...](http://ricostacruz.com/bump-cli/bump.gif)
 
+[![Status](https://travis-ci.org/rstacruz/bump-cli.svg?branch=master)](https://travis-ci.org/rstacruz/bump-cli)
+
 ## Install
 
 ```sh
