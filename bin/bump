@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 var Context = require('../index').Context;
-var prompt = require('prompt');
 var fs = require('fs');
 
 var args = require('minimist')(process.argv.slice(2), {
