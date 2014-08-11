@@ -19,8 +19,11 @@ See [command line options][options].
 
 ## Thanks
 
-Inspired by https://github.com/marksteve/bump. bump-cli is backwards-compatible 
-(mostly) with the old 2013 version of @marksteve's bump.
+Inspired by [@marksteve]'s [bump][bump-py]. `bump-cli` is backwards-compatible 
+(mostly) with the old 2013 version bump.
+
+[@marksteve]: https://github.com/marksteve
+[bump-py]: https://github.com/marksteve/bump
 
 ## :copyright:
 
