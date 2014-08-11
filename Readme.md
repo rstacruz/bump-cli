@@ -25,16 +25,16 @@ Inspired by [@marksteve]'s [bump][bump-py]. `bump-cli` is backwards-compatible
 [@marksteve]: https://github.com/marksteve
 [bump-py]: https://github.com/marksteve/bump
 
-## :copyright:
+**©**
 
-**bump-cli** © 2014+, Rico Sta. Cruz. Released under the [MIT License].<br>
-Authored and maintained by Rico Sta. Cruz with help from [contributors].
+**bump-cli** © 2014+, Rico Sta. Cruz. Released under the [MIT] License.<br>
+Authored and maintained by Rico Sta. Cruz with help from contributors. [(list)][contributors]
 
 > [ricostacruz.com](http://ricostacruz.com) &nbsp;&middot;&nbsp;
 > GitHub [@rstacruz](https://github.com/rstacruz) &nbsp;&middot;&nbsp;
 > Twitter [@rstacruz](https://twitter.com/rstacruz)
 
-[MIT License]: http://mit-license.org/
+[MIT]: http://mit-license.org/
 [contributors]: http://github.com/rstacruz/bump-cli/contributors
 [semver]: https://www.npmjs.org/package/semver
 [options]: Help.txt
