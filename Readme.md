@@ -9,6 +9,8 @@ $ npm install -g bump-cli
 $ bump --help
 ```
 
+See [command line options][options].
+
 [![npm version](https://badge.fury.io/js/jquery.svg)](https://npmjs.org/package/jquery "View this project on npm")
 
 ## Thanks
@@ -28,3 +30,4 @@ Authored and maintained by Rico Sta. Cruz with help from [contributors].
 [MIT License]: http://mit-license.org/
 [contributors]: http://github.com/rstacruz/bump-cli/contributors
 [semver]: https://www.npmjs.org/package/semver
+[options]: help.txt

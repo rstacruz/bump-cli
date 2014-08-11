@@ -11,27 +11,7 @@ var args = require('minimist')(process.argv.slice(2), {
 
 if (args.help || !args._[0]) {
   var cmd = require('path').basename(process.argv[1]);
-  console.log([
-      'Usage:',
-      '    '+cmd+' FILES [options]',
-      '',
-      'Options:',
-      '    -h, --help         print usage information',
-      '    -V, --version      show version info and exit',
-      '',
-      "    -y, --yes          assume yes, don't prompt",
-      "    -q, --quiet        supress messages (implies -y)",
-      '',
-      '    -v, --to VERSION   use this version',
-      '    -p, --patch        bump patch version (2.3.4 -> 2.3.5) - default',
-      '    -m, --minor        bump minor version (2.3.4 -> 2.4.0)',
-      '    -M, --major        bump major version (2.3.4 -> 3.0.0)',
-      '',
-      '        --prerelease   bump a prerelease number (2.3.4-8 -> 2.3.4-9)',
-      '        --prepatch     bump patch and add prerelease (2.3.4 -> 2.3.5-0)',
-      '        --preminor     bump minor and add prerelease (2.3.4 -> 2.4.0-0)',
-      '        --premajor     bump major and add prerelease (2.3.4 -> 3.0.0-0)',
-  ].join('\n'));
+  console.log(require('fs').readFileSync(__dirname+'/../Help.txt','utf-8').replace(/\$0/g, cmd));
   process.exit();
 }
 
