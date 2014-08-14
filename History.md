@@ -1,3 +1,7 @@
+## v1.1.3 - August 13, 2014
+
+ * No actual changes; just add `repository` metadata in the npm package.
+
 ## v1.1.2 - August 11, 2014
 
  * Fix execution error.
