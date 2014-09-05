@@ -159,3 +159,11 @@ describe('specifying an increment', function () {
     expect(ctx.toString()).eql('version=pancakes');
   });
 });
+
+describe("upper-case VERSION", function () {
+  it('parsed by Context', function () {
+    ctx = new Context("VERSION=2.2.5");
+    expect(ctx.valid).eql(true);
+    expect(ctx.version).eql('2.2.5');
+  });
+});
