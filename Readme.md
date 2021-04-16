@@ -1,4 +1,4 @@
-# bump-cli
+# @rstacruz/bump-cli
 
 Bumps semantic versions according to [semver] guidelines.
 
@@ -9,13 +9,16 @@ Bumps semantic versions according to [semver] guidelines.
 ## Install
 
 ```sh
-$ npm install -g bump-cli
-$ bump --help
+npx @rstacruz/bump-cli --help
 ```
 
 See [command line options][options].
 
 [![npm version](https://badge.fury.io/js/bump-cli.svg)](https://npmjs.org/package/bump-cli "View this project on npm")
+
+## Note on upgrading
+
+Version `1.x` and below was published under `bump-cli`, but the newer versions are published under `@rstacruz/bump-cli`.
 
 ## Thanks
 
@@ -27,7 +30,7 @@ Inspired by [@marksteve]'s [bump][bump-py]. `bump-cli` is backwards-compatible
 
 :copyright:
 
-**bump-cli** © 2014+, Rico Sta. Cruz. Released under the [MIT] License.<br>
+**@rstacruz/bump-cli** © 2014-2021, Rico Sta. Cruz. Released under the [MIT] License.<br>
 Authored and maintained by Rico Sta. Cruz with help from contributors. [(list)][contributors]
 
 > [ricostacruz.com](http://ricostacruz.com) &nbsp;&middot;&nbsp;
