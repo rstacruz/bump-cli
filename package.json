@@ -19,14 +19,14 @@
     "bump": "./bin/bump"
   },
   "devDependencies": {
-    "chai": "^1.9.1",
-    "mocha": "^1.21.4",
-    "sinon": "^1.10.3",
-    "sinon-chai": "^2.5.0"
+    "chai": "^4.3.4",
+    "mocha": "^9.0.1",
+    "sinon": "^11.1.1",
+    "sinon-chai": "^3.7.0"
   },
   "dependencies": {
-    "minimist": "^1.1.0",
-    "semver": "^3.0.1"
+    "minimist": "^1.2.5",
+    "semver": "^7.3.5"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org",
