@@ -1,6 +1,6 @@
-## v2.0.1 - Unreleased
+## v2.0.1 - July 10, 2021
 
-* Upgrade `semver` dependency to fix vulnerability 
+* Upgrade `semver` dependency to fix vulnerability.
 
 ## v2.0.0 - April 16, 2021
 
