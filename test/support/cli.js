@@ -83,7 +83,7 @@ exports.run = function (args) {
 exports.success = function () {
   it('is successful', function () {
     expect(exports.result.code).eql(0);
-    expect(exports.result.error).falsy;
+    expect(exports.result.error).not.ok;
   });
 };
 
