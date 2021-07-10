@@ -1,6 +1,6 @@
 {
   "name": "@rstacruz/bump-cli",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Increments version numbers in files",
   "main": "index.js",
   "directories": {
@@ -16,7 +16,7 @@
   "author": "Rico Sta. Cruz <hi@ricostacruz.com>",
   "license": "MIT",
   "bin": {
-    "bump": "./bin/bump"
+    "bump": "bin/bump"
   },
   "devDependencies": {
     "chai": "^4.3.4",
